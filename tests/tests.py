@@ -79,6 +79,7 @@ def test_predict(config_path,
     test_configs = get_configs(config_path)
     test_configs['input_data_path'] = test_data_path
     test_configs['output_model_path'] = test_model_path
+    test_configs['output_data_path'] = test_predictions_path
     
     generate_dataset(test_configs, df_name='test.csv')
     prediction_pipeline(test_configs)

@@ -40,10 +40,11 @@ def prediction_pipeline(parameters):
     
     # Make predictions
     predictions = model.predict(X_test)
-    print('Generating predictions...')
+    logger.info('Generating predictions...')
     
     # Save predictions
-    np.savetxt(data_path + 'predictions.csv', predictions, fmt='%s', delimiter=',')
+    logger.info('Saving predictions to {}'.format(parameters['output_data_path']))
+    np.savetxt(parameters['output_data_path'], predictions, fmt='%s', delimiter=',')
     logger.info('Predictions generated!')
 
     
