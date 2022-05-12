@@ -5,3 +5,4 @@ xgboost
 shap
 pytest
 dvc
+marshmallow_dataclass

@@ -32,14 +32,14 @@ def generate_dataset(configs, df_name='train.csv'):
     """Generates dataset with random values"""
     
     df_size = np.random.randint(10, 10000)
-    df_columns = configs['feature_cols'] + configs['target_col']
-    n_cols = len(configs['feature_cols'])
+    df_columns = configs.feature_cols + configs.target_col
+    n_cols = len(configs.feature_cols)
     
     target_data = np.random.randint(2, size=df_size).reshape(-1, 1)
     features_data = np.random.rand(df_size, n_cols) * np.random.randint(-1e3, 1e3)
     
     df = pd.DataFrame(np.hstack([features_data, target_data]), columns=df_columns)
-    df.to_csv(configs['input_data_path'] + df_name)
+    df.to_csv(configs.input_data_path + df_name)
 
     
     
