@@ -2,31 +2,22 @@ import yaml
 import numpy as np
 import pandas as pd
 
-
-def get_configs(config_path):
-    
-    """Returns config parameters"""
-    
-    with open(config_path) as f:
-        conf = yaml.safe_load(f.read())
-        
-    return conf
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.impute import SimpleImputer
 
 
-def get_params(parameters_lst, param_name):
+def preprocessing_pipeline(input_data_path,
+                           feature_columns,
+                           target_column):
     
-    """
-    Returns parameter value given list of parameter dictionaries
-    
-    parameters_lst: list of parameterrs
-    param_name: name of parameter to return
-    """
-    
-    for param in parameters_lst:
-        if param_name in param:
-            return param[param_name]
+    data = pd.read_csv(input_data_path)
+    X, y = data[feature_columns], data[target_column]
+    pipe = Pipeline(steps=[('impute', SimpleImputer())])
+    X = pipe.fit_transform(X)
+    return X, y
         
-        
+    
 def generate_dataset(configs, df_name='train.csv'):
     
     """Generates dataset with random values"""

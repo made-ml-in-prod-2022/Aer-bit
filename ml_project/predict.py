@@ -5,7 +5,6 @@ import pickle
 import logging
 import numpy as np
 import pandas as pd
-
 from argparse import ArgumentParser
 from ml_project.entities.pipeline_parameters import get_pipeline_parameters
 
@@ -25,9 +24,8 @@ def parse_arguments():
 def prediction_pipeline(parameters):
 
     # Get test data
-    data_path = parameters.input_data_path + 'test.csv'
-    data = pd.read_csv(data_path)
-    logger.info('Loading test data from: {}'.format(data_path))
+    data = pd.read_csv(parameters.test_data_path)
+    logger.info('Loading test data from: {}'.format(parameters.test_data_path))
     
     # Prepare data 
     features = parameters.feature_cols

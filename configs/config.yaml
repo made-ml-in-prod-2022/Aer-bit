@@ -1,5 +1,6 @@
-input_data_path: 'data/'
-data_file_name: 'heart_cleveland_upload.csv'
+input_data_path: 'data/heart_cleveland_upload.csv'
+train_data_path: 'data/train.csv'
+test_data_path: 'data/test.csv'
 output_model_path: 'models/model.pkl'
 output_data_path: 'data/predictions.csv'
 splitting_params:

@@ -22,7 +22,8 @@ class TrainParams:
 @dataclass
 class PipelineParameters:
     input_data_path: str
-    data_file_name: str
+    train_data_path: str
+    test_data_path: str
     output_model_path: str
     output_data_path: str
     splitting_params: SplitParams

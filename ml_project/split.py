@@ -6,7 +6,7 @@ import pandas as pd
 
 from argparse import ArgumentParser
 from sklearn.model_selection import train_test_split
-from ml_project.utils import get_params, get_configs
+from ml_project.entities.pipeline_parameters import get_pipeline_parameters 
 
 
 def parse_arguments():
@@ -16,26 +16,20 @@ def parse_arguments():
 
 
 def split_data(parameters):
-
-    # Get split params
-    split_params = parameters['splitting_params']
-    test_size = get_params(split_params, 'val_size')
-    random_state = get_params(split_params, 'random_state') 
     
     # Load data
-    data_path = parameters['input_data_path']
-    fname = parameters['data_file_name']
-    data = pd.read_csv(data_path + fname)
-    
+    data = pd.read_csv(parameters.input_data_path)
+        
     # Train test split          
-    train, test = train_test_split(data, test_size=test_size, random_state=random_state)
+    train, test = train_test_split(data, 
+                                   test_size=parameters.splitting_params.val_size, 
+                                   random_state=parameters.splitting_params.random_state)
     
     # Save train and test data
-    train.to_csv(data_path + 'train.csv', index=None)
-    test.to_csv(data_path + 'test.csv', index=None)
+    train.to_csv(parameters.train_data_path, index=None)
+    test.to_csv(parameters.test_data_path, index=None)
               
 
 if __name__ == '__main__':
     args = parse_arguments()
-    parameters = get_configs(args.conf_path)
-    sys.exit(split_data(parameters))
+    sys.exit(split_data(get_pipeline_parameters(args.conf_path)))

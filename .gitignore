@@ -1,4 +1,4 @@
 .ipynb_checkpoints
 prodml_project.egg-info
 .venv/
-__pycache__
+*/__pycache__/*
