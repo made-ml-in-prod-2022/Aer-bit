@@ -2,29 +2,9 @@ import os
 import pytest
 import numpy as np
 import pandas as pd
-from ml_project.entities.pipeline_parameters import get_pipeline_parameters 
 from ml_project.utils import generate_dataset
 from ml_project.train import train_pipeline
 from ml_project.predict import prediction_pipeline
-
-
-def test_get_pipeline_parameters(config_path,
-                     input_data_path, 
-                     train_data_path, 
-                     test_data_path,  
-                     target_col,
-                     feature_cols):
-    
-    parameters = get_pipeline_parameters(config_path)
-    
-    assert input_data_path == parameters.input_data_path
-    assert train_data_path == parameters.train_data_path
-    assert test_data_path == parameters.test_data_path
-    assert target_col == parameters.target_col
-    assert feature_cols == parameters.feature_cols
-    
-    assert parameters.splitting_params.val_size > 0
-    assert parameters.splitting_params.val_size < 1
     
 
 def test_dataset(input_data_path,

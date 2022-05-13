@@ -1,0 +1,6 @@
+[2022-05-13 10:29:54,403][__main__][INFO] - Downloading training data from: /home/alexander/Documents/MADE/Sem2/ML_prod/HW1_v2/data/train.csv
+[2022-05-13 10:29:54,409][__main__][INFO] - Train data shape: (237, 13)
+[2022-05-13 10:29:54,409][__main__][INFO] - Configure training parameters...
+[2022-05-13 10:29:54,409][__main__][INFO] - Number of estimators: 100, learning rate: 0.003, max_depth: 5
+[2022-05-13 10:29:54,409][__main__][INFO] - Start training...
+[2022-05-13 10:29:54,502][__main__][INFO] - Finished training! Train accuracy score: 0.8945147679324894

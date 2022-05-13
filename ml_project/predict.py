@@ -2,11 +2,11 @@ import os
 import sys
 import yaml
 import pickle
+import hydra
+from omegaconf import DictConfig
 import logging
 import numpy as np
 import pandas as pd
-from argparse import ArgumentParser
-from ml_project.entities.pipeline_parameters import get_pipeline_parameters
 
 
 logger = logging.getLogger(__name__)
@@ -15,36 +15,30 @@ logger.setLevel(logging.INFO)
 logger.addHandler(handler)
 
 
-def parse_arguments():
-    parser = ArgumentParser(__doc__)
-    parser.add_argument('--conf_path', '-cf', help='Path to config file', default=None)
-    return parser.parse_args()
-
-
-def prediction_pipeline(parameters):
+@hydra.main(config_path='configs', config_name='config.yaml')
+def prediction_pipeline(configs):
+    orig_cwd = hydra.utils.get_original_cwd()
 
     # Get test data
-    data = pd.read_csv(parameters.test_data_path)
-    logger.info('Loading test data from: {}'.format(parameters.test_data_path))
+    data = pd.read_csv(orig_cwd + configs.test_data_path)
+    logger.info('Loading test data from: {}'.format(orig_cwd + configs.test_data_path))
     
     # Prepare data 
-    features = parameters.feature_cols
-    X_test = data[features]
+    X_test = data[configs.feature_cols]
     
     # Load model 
-    model = pickle.load(open(parameters.output_model_path, "rb"))
-    logger.info('Loading model from: {}'.format(parameters.output_model_path))
+    model = pickle.load(open(orig_cwd + configs.output_model_path, "rb"))
+    logger.info('Loading model from: {}'.format(orig_cwd + configs.output_model_path))
     
     # Make predictions
     predictions = model.predict(X_test)
     logger.info('Generating predictions...')
     
     # Save predictions
-    logger.info('Saving predictions to {}'.format(parameters.output_data_path))
-    np.savetxt(parameters.output_data_path, predictions, fmt='%s', delimiter=',')
+    logger.info('Saving predictions to {}'.format(orig_cwd + configs.output_data_path))
+    np.savetxt(orig_cwd + configs.output_data_path, predictions, fmt='%s', delimiter=',')
     logger.info('Predictions generated!')
 
     
 if __name__ == '__main__':
-    args = parse_arguments()
-    sys.exit(prediction_pipeline(get_pipeline_parameters(args.conf_path)))
+    sys.exit(prediction_pipeline())
