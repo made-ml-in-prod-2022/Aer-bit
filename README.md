@@ -10,7 +10,7 @@ pip install -r requirements.txt
 ~~~
 -------------------------------
 
-Generate train and test corpus from raw data:
+Generate train and test corpus from raw data (in case test set is not provided):
 ~~~
 python ml_project/split.py
 ~~~
