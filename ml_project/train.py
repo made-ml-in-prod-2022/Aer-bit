@@ -19,11 +19,10 @@ logger.addHandler(handler)
 
 @hydra.main(config_path='configs', config_name='config.yaml')
 def train_pipeline(configs):
-    orig_cwd = hydra.utils.get_original_cwd()
     
     # Data preprocessing pipeline
-    logger.info('Downloading training data from: {}'.format(orig_cwd + configs.train_data_path))
-    X_train, y_train = preprocessing_pipeline(orig_cwd + configs.train_data_path, 
+    logger.info('Downloading training data from: {}'.format(hydra.utils.to_absolute_path(configs.train_data_path)))
+    X_train, y_train = preprocessing_pipeline(hydra.utils.to_absolute_path(configs.train_data_path), 
                                               configs.feature_cols,
                                               configs.target_col)
     logger.info('Train data shape: {}'.format(X_train.shape))
@@ -43,7 +42,7 @@ def train_pipeline(configs):
     logger.info('Finished training! Train accuracy score: {}'.format(xgb_clf.score(X_train, y_train)))
     
     # Save model
-    pickle.dump(xgb_clf, open(orig_cwd + configs.output_model_path, "wb"))
+    pickle.dump(xgb_clf, open(hydra.utils.to_absolute_path(configs.output_model_path), "wb"))
         
         
 if __name__ == '__main__':

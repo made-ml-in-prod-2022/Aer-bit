@@ -18,19 +18,30 @@ def preprocessing_pipeline(input_data_path,
     return X, y
         
     
-def generate_dataset(configs, df_name='train.csv'):
+def generate_dataset(generated_train_path,
+                     generated_test_path,
+                     feature_columns, 
+                     target_column):
     
-    """Generates dataset with random values"""
+    # Generate train and test data
+    df_train_size = np.random.randint(10, 10000)
+    df_test_size = int(df_train_size * 0.5)
+    df_columns = feature_columns + target_column
+    n_cols = len(feature_columns)
     
-    df_size = np.random.randint(10, 10000)
-    df_columns = configs.feature_cols + configs.target_col
-    n_cols = len(configs.feature_cols)
+    target_train_data = np.random.randint(2, size=df_train_size).reshape(-1, 1)
+    features_train_data = np.random.rand(df_train_size, n_cols) * np.random.randint(-1e4, 1e4)
     
-    target_data = np.random.randint(2, size=df_size).reshape(-1, 1)
-    features_data = np.random.rand(df_size, n_cols) * np.random.randint(-1e3, 1e3)
+    target_test_data = np.random.randint(2, size=df_test_size).reshape(-1, 1)
+    features_test_data = np.random.rand(df_test_size, n_cols) * np.random.randint(-1e4, 1e4)
     
-    df = pd.DataFrame(np.hstack([features_data, target_data]), columns=df_columns)
-    df.to_csv(configs.input_data_path + df_name)
+    df_train = pd.DataFrame(np.hstack([features_train_data, target_train_data]), columns=df_columns)
+    df_test = pd.DataFrame(np.hstack([features_test_data, target_test_data]), columns=df_columns)
+    
+    df_train.to_csv(generated_train_path)
+    df_test.to_csv(generated_test_path)
+    
+
 
     
     

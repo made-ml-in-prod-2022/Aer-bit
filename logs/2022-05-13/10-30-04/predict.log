@@ -1,5 +1,0 @@
-[2022-05-13 10:30:04,325][__main__][INFO] - Loading test data from: /home/alexander/Documents/MADE/Sem2/ML_prod/HW1_v2/data/test.csv
-[2022-05-13 10:30:04,594][__main__][INFO] - Loading model from: /home/alexander/Documents/MADE/Sem2/ML_prod/HW1_v2/models/model.pkl
-[2022-05-13 10:30:04,597][__main__][INFO] - Generating predictions...
-[2022-05-13 10:30:04,597][__main__][INFO] - Saving predictions to /home/alexander/Documents/MADE/Sem2/ML_prod/HW1_v2/data/predictions.csv
-[2022-05-13 10:30:04,597][__main__][INFO] - Predictions generated!

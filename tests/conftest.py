@@ -33,6 +33,16 @@ def feature_cols():
 
 
 @pytest.fixture()
+def generated_train_data_path():
+    return 'tests/test_data/train.csv'
+
+
+@pytest.fixture()
+def generated_test_data_path():
+    return 'tests/test_data/test.csv'
+
+
+@pytest.fixture()
 def test_model_path():
     return 'tests/test_data/model.pkl'
 

@@ -10,10 +10,9 @@ from sklearn.model_selection import train_test_split
 
 @hydra.main(config_path='configs', config_name='config.yaml')
 def split_data(configs):
-    orig_cwd = hydra.utils.get_original_cwd()
     
     # Load data
-    data = pd.read_csv(orig_cwd + configs.input_data_path)
+    data = pd.read_csv(hydra.utils.to_absolute_path(configs.input_data_path))
         
     # Train test split          
     train, test = train_test_split(data, 
@@ -21,8 +20,8 @@ def split_data(configs):
                                    random_state=configs.splitting_params.random_state)
     
     # Save train and test data
-    train.to_csv(orig_cwd + configs.train_data_path, index=None)
-    test.to_csv(orig_cwd + configs.test_data_path, index=None)
+    train.to_csv(hydra.utils.to_absolute_path(configs.train_data_path), index=None)
+    test.to_csv(hydra.utils.to_absolute_path(configs.test_data_path), index=None)
               
 
 if __name__ == '__main__':
