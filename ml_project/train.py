@@ -17,7 +17,7 @@ logger.setLevel(logging.INFO)
 logger.addHandler(handler)
 
 
-@hydra.main(config_path='configs', config_name='config.yaml')
+@hydra.main(config_path='configs', config_name='config2.yaml')
 def train_pipeline(configs):
     
     # Data preprocessing pipeline
