@@ -1,0 +1,10 @@
+pandas
+fastapi
+typing
+pydantic
+hydra-core
+sklearn
+requests
+click
+uvicorn
+xgboost
