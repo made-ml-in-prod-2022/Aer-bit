@@ -3,4 +3,4 @@ prodml_project.egg-info
 .venv/
 __pycache__
 outputs/*
-.idea/
+
