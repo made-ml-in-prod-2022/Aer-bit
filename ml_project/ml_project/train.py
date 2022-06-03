@@ -4,7 +4,7 @@ import hydra
 import logging
 import xgboost
 
-from ml_project.utils import preprocessing_pipeline
+from ml_project.ml_project.utils import preprocessing_pipeline
 
 
 logger = logging.getLogger(__name__)

@@ -5,9 +5,9 @@ import pandas as pd
 from hydra import initialize, compose
 from sklearn.utils.validation import check_is_fitted
 
-from ml_project.utils import generate_dataset
-from ml_project.train import train_pipeline
-from ml_project.predict import prediction_pipeline
+from ml_project.ml_project.utils import generate_dataset
+from ml_project.ml_project.train import train_pipeline
+from ml_project.ml_project.predict import prediction_pipeline
 
     
 
