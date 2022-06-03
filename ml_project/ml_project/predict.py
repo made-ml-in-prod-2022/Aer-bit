@@ -1,9 +1,6 @@
-import os
 import sys
-import yaml
 import pickle
 import hydra
-from omegaconf import DictConfig
 import logging
 import numpy as np
 import pandas as pd
@@ -17,7 +14,6 @@ logger.addHandler(handler)
 
 @hydra.main(config_path='configs', config_name='config.yaml')
 def prediction_pipeline(configs):
-    #orig_cwd = hydra.utils.get_original_cwd()
 
     # Get test data
     data = pd.read_csv(hydra.utils.to_absolute_path(configs.test_data_path))
