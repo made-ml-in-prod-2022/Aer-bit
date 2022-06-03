@@ -8,23 +8,18 @@ def config_path():
 
 
 @pytest.fixture()
-def data_path():
-    return 'data/'
+def input_data_path():
+    return 'data/heart_cleveland_upload.csv'
 
 
 @pytest.fixture()
-def data_filename():
-    return 'heart_cleveland_upload.csv'
+def train_data_path():
+    return 'data/train.csv'
 
 
 @pytest.fixture()
-def train_filename():
-    return 'train.csv'
-
-
-@pytest.fixture()
-def test_filename():
-    return 'test.csv'
+def test_data_path():
+    return 'data/test.csv'
 
 
 @pytest.fixture()
@@ -38,8 +33,13 @@ def feature_cols():
 
 
 @pytest.fixture()
-def test_data_path():
-    return 'tests/test_data/'
+def generated_train_data_path():
+    return 'tests/test_data/train.csv'
+
+
+@pytest.fixture()
+def generated_test_data_path():
+    return 'tests/test_data/test.csv'
 
 
 @pytest.fixture()

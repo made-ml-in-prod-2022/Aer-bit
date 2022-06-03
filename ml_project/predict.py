@@ -1,14 +1,9 @@
-import os
 import sys
-import yaml
 import pickle
+import hydra
 import logging
 import numpy as np
 import pandas as pd
-from ml_project import utils
-
-from argparse import ArgumentParser
-from ml_project.utils import get_configs, get_params, generate_dataset
 
 
 logger = logging.getLogger(__name__)
@@ -17,38 +12,29 @@ logger.setLevel(logging.INFO)
 logger.addHandler(handler)
 
 
-def parse_arguments():
-    parser = ArgumentParser(__doc__)
-    parser.add_argument('--conf_path', '-cf', help='Path to config file', default=None)
-    return parser.parse_args()
-
-
-def prediction_pipeline(parameters):
+@hydra.main(config_path='configs', config_name='config.yaml')
+def prediction_pipeline(configs):
 
     # Get test data
-    data_path = parameters['input_data_path'] + 'test.csv'
-    data = pd.read_csv(data_path)
-    logger.info('Loading test data from: {}'.format(data_path))
+    data = pd.read_csv(hydra.utils.to_absolute_path(configs.test_data_path))
+    logger.info('Loading test data from: {}'.format(hydra.utils.to_absolute_path(configs.test_data_path)))
     
     # Prepare data 
-    features = parameters['feature_cols']
-    X_test = data[features]
+    X_test = data[configs.feature_cols]
     
     # Load model 
-    model = pickle.load(open(parameters['output_model_path'], "rb"))
-    logger.info('Loading model from: {}'.format(parameters['output_model_path']))
+    model = pickle.load(open(hydra.utils.to_absolute_path(configs.output_model_path), "rb"))
+    logger.info('Loading model from: {}'.format(hydra.utils.to_absolute_path(configs.output_model_path)))
     
     # Make predictions
     predictions = model.predict(X_test)
     logger.info('Generating predictions...')
     
     # Save predictions
-    logger.info('Saving predictions to {}'.format(parameters['output_data_path']))
-    np.savetxt(parameters['output_data_path'], predictions, fmt='%s', delimiter=',')
+    logger.info('Saving predictions to {}'.format(hydra.utils.to_absolute_path(configs.output_data_path)))
+    np.savetxt(hydra.utils.to_absolute_path(configs.output_data_path), predictions, fmt='%s', delimiter=',')
     logger.info('Predictions generated!')
 
     
 if __name__ == '__main__':
-    args = parse_arguments()
-    parameters = get_configs(args.conf_path)
-    sys.exit(prediction_pipeline(parameters))
+    sys.exit(prediction_pipeline())

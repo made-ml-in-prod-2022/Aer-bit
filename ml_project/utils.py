@@ -1,46 +1,40 @@
-import yaml
 import numpy as np
 import pandas as pd
+from Typing import Tuple
+from sklearn.pipeline import Pipeline
+from sklearn.impute import SimpleImputer
 
 
-def get_configs(config_path):
+def preprocessing_pipeline(input_data_path: str,
+                           feature_columns: list,
+                           target_column: list) -> Tuple[pd.DataFrame, pd.DataFrame]:
     
-    """Returns config parameters"""
-    
-    with open(config_path) as f:
-        conf = yaml.safe_load(f.read())
+    data = pd.read_csv(input_data_path)
+    X, y = data[feature_columns], data[target_column]
+    pipe = Pipeline(steps=[('impute', SimpleImputer())])
+    X = pipe.fit_transform(X)
+    return X, y
         
-    return conf
-
-
-def get_params(parameters_lst, param_name):
     
-    """
-    Returns parameter value given list of parameter dictionaries
+def generate_dataset(generated_train_path: str,
+                     generated_test_path: str,
+                     feature_columns: list,
+                     target_column: list) -> None:
     
-    parameters_lst: list of parameterrs
-    param_name: name of parameter to return
-    """
+    # Generate train and test data
+    df_train_size = np.random.randint(10, 10000)
+    df_test_size = int(df_train_size * 0.5)
+    df_columns = feature_columns + target_column
+    n_cols = len(feature_columns)
     
-    for param in parameters_lst:
-        if param_name in param:
-            return param[param_name]
-        
-        
-def generate_dataset(configs, df_name='train.csv'):
+    target_train_data = np.random.randint(2, size=df_train_size).reshape(-1, 1)
+    features_train_data = np.random.rand(df_train_size, n_cols) * np.random.randint(-1e4, 1e4)
     
-    """Generates dataset with random values"""
+    target_test_data = np.random.randint(2, size=df_test_size).reshape(-1, 1)
+    features_test_data = np.random.rand(df_test_size, n_cols) * np.random.randint(-1e4, 1e4)
     
-    df_size = np.random.randint(10, 10000)
-    df_columns = configs['feature_cols'] + configs['target_col']
-    n_cols = len(configs['feature_cols'])
+    df_train = pd.DataFrame(np.hstack([features_train_data, target_train_data]), columns=df_columns)
+    df_test = pd.DataFrame(np.hstack([features_test_data, target_test_data]), columns=df_columns)
     
-    target_data = np.random.randint(2, size=df_size).reshape(-1, 1)
-    features_data = np.random.rand(df_size, n_cols) * np.random.randint(-1e3, 1e3)
-    
-    df = pd.DataFrame(np.hstack([features_data, target_data]), columns=df_columns)
-    df.to_csv(configs['input_data_path'] + df_name)
-
-    
-    
-    
+    df_train.to_csv(generated_train_path)
+    df_test.to_csv(generated_test_path)

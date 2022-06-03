@@ -4,23 +4,25 @@ ML project
 Installation:
 
 ~~~
+python -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 ~~~
 -------------------------------
 
-Generate train and test corpus from raw data:
+Generate train and test corpus from raw data (in case test set is not provided):
 ~~~
-python ml_project/split.py -cf configs/config.yaml
+python ml_project/split.py
 ~~~
 
 Run training pipeline:
 ~~~
-python ml_project/train.py -cf configs/config.yaml
+python ml_project/train.py 
 ~~~
 
 Generate predictions:
 ~~~
-python ml_project/predict.py -cf configs/config.yaml
+python ml_project/predict.py 
 ~~~
 -------------------------------
 Tests:
