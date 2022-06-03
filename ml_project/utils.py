@@ -1,12 +1,13 @@
 import numpy as np
 import pandas as pd
+from Typing import Tuple
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
 
 
-def preprocessing_pipeline(input_data_path,
-                           feature_columns,
-                           target_column):
+def preprocessing_pipeline(input_data_path: str,
+                           feature_columns: list,
+                           target_column: list) -> Tuple[pd.DataFrame, pd.DataFrame]:
     
     data = pd.read_csv(input_data_path)
     X, y = data[feature_columns], data[target_column]
@@ -15,10 +16,10 @@ def preprocessing_pipeline(input_data_path,
     return X, y
         
     
-def generate_dataset(generated_train_path,
-                     generated_test_path,
-                     feature_columns, 
-                     target_column):
+def generate_dataset(generated_train_path: str,
+                     generated_test_path: str,
+                     feature_columns: list,
+                     target_column: list) -> None:
     
     # Generate train and test data
     df_train_size = np.random.randint(10, 10000)
@@ -37,9 +38,3 @@ def generate_dataset(generated_train_path,
     
     df_train.to_csv(generated_train_path)
     df_test.to_csv(generated_test_path)
-    
-
-
-    
-    
-    
