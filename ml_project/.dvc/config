@@ -1,0 +1,4 @@
+[core]
+    remote = data
+['remote "data"']
+    url = https://drive.google.com/drive/folders/1d7rZGBPRqzLeUDCipJGLmwoOc4yIghev

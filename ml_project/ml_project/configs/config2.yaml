@@ -1,0 +1,26 @@
+input_data_path: 'data/heart_cleveland_upload.csv'
+train_data_path: 'data/train.csv'
+test_data_path: 'data/test.csv'
+output_model_path: 'models/model.pkl'
+output_data_path: 'data/predictions.csv'
+splitting_params:
+    val_size: 0.3
+    random_state: 42
+train_params:
+    n_estimators: 300
+    lr: 0.01
+    max_depth: 3
+    random_state: 42
+feature_cols:
+    - 'sex'
+    - 'cp'
+    - 'fbs'
+    - 'restecg'
+    - 'thalach'
+    - 'exang'
+    - 'oldpeak'
+    - 'slope'
+    - 'ca'
+    - 'thal'
+target_col: 
+    - 'condition'
