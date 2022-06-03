@@ -1,7 +1,5 @@
 import yaml
-from typing import Optional
 from dataclasses import dataclass, field
-
 from marshmallow_dataclass import class_schema
 
 
