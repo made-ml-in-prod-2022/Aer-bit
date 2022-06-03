@@ -1,4 +1,0 @@
-outs:
-- md5: 0f2481de7c0a328ab20e1b4e07a98036
-  size: 120
-  path: predictions.csv

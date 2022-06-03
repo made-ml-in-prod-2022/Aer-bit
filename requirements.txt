@@ -1,9 +1,0 @@
-numpy
-pandas
-sklearn
-xgboost
-shap
-pytest
-dvc
-marshmallow_dataclass
-hydra-core
