@@ -13,7 +13,6 @@ with DAG('docker_download', start_date=days_ago(5),
         network_mode="bridge",
         do_xcom_push=True,
         mount_tmp_dir=True,
-        # !!! HOST folder(NOT IN CONTAINER) replace with yours !!!
         mounts=[Mount(source="/home/alexander/Documents/MADE/Sem2/ML_prod/HW1_v2/airflow_ml_dags/data/", target="/data", type='bind')]
     )
 

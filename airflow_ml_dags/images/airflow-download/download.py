@@ -1,12 +1,12 @@
 import os
-
 import click
+
 from sklearn.datasets import load_breast_cancer
 
 
 @click.command("download")
 @click.argument("output_dir")
-def download(output_dir: str):
+def download(output_dir: str) -> None:
     X, y = load_breast_cancer(return_X_y=True, as_frame=True)
 
     os.makedirs(output_dir, exist_ok=True)
