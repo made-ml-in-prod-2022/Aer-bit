@@ -15,7 +15,7 @@ def predict_user(user_id: int) -> None:
             print(r.json()['detail'])
 
 
-def check_input(user_id: int) -> None:
+def check_input(user_id: int) -> bool:
     r = requests.get(''.join([URL, 'get-user/', str(user_id)]))
     if r.status_code == 200:
         user = r.json()

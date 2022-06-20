@@ -3,15 +3,15 @@ ML project API
 There are 2 options to create docker image for the application:
 1. To build image on local machine, go to project root directory where Dockerfile is located and execute:
 ~~~
-docker build -t image_name .
+docker build -t image4 .
 ~~~
 2. To download image from hub:
 ~~~
-docker pull aershov3/ml_prod:image_name
+docker pull aershov3/ml_prod:image4
 ~~~
 To run a container based on the image:
 ~~~
-docker run -d --name container_name -p 8000:8000 image_name
+docker run -d --name container_x -p 8000:8000 image4
 ~~~
 ---------------------
 Once started, add /docs in the url to see the list of available commands:
@@ -36,4 +36,5 @@ To optimise the docker image size I have tried to reduce the number of files tha
 and the number of packages that are used to build the image. I have created 3 docker images (image1, image2 and image3) and pushed them to a remote repository: https://hub.docker.com/r/aershov3/ml_prod/tags.
 The first one (image1) was created by copying everything from the current directory to the image file (COPY . .). 
 image2 was created by only copying modules that are used during inference. As a result, the compressed image size was reduced by approximately 300 MB. 
-Finally, I reduced the number of packages to the required minimum in requirements.txt file  and rebuilt the image (image3). This resulted in further 100 MB decrease in image size.  
+Finally, I reduced the number of packages to the required minimum in requirements.txt file  and rebuilt the image (image3). This resulted in further 100 MB decrease in image size. 
+Finally, using Python3.6:slim-stretch as a base image enabled further decrease of the image size down to 980 MB.  
