@@ -1,10 +1,11 @@
 import os
 import pickle
-import pandas as pd
-from fastapi import FastAPI, Path, HTTPException
-from typing import Optional
-from pydantic import BaseModel, conint
 import hydra
+import pandas as pd
+
+from fastapi import FastAPI, Path, HTTPException
+from pydantic import BaseModel, conint
+from typing import Optional
 from hydra import initialize, compose
 from sklearn.utils.validation import check_is_fitted
 
