@@ -25,7 +25,7 @@ jobs:
       run: |
         cd online_inference
         python -m pip install --upgrade pip
-        python -m pip install flake8 pytest fastapi requests pandas hydra sklearn click xgboost
+        python -m pip install flake8 pytest fastapi requests pandas hydra-core sklearn click xgboost
     - name: Lint with flake8pydantic
       run: |
         # stop the build if there are Python syntax errors or undefined names
