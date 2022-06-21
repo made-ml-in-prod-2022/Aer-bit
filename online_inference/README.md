@@ -37,4 +37,4 @@ and the number of packages that are used to build the image. I have created 3 do
 The first one (image1) was created by copying everything from the current directory to the image file (COPY . .). 
 image2 was created by only copying modules that are used during inference. As a result, the compressed image size was reduced by approximately 300 MB. 
 Finally, I reduced the number of packages to the required minimum in requirements.txt file  and rebuilt the image (image3). This resulted in further 100 MB decrease in image size. 
-Finally, using Python3.6:slim-stretch as a base image enabled further decrease of the image size down to 980 MB.  
+Finally, using Python3.9:slim-buster as a base image enabled further decrease of the image size down to 800 MB.  

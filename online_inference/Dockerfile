@@ -1,10 +1,10 @@
-FROM python:3.6-slim-stretch
+FROM python:3.9-slim-buster
 
 WORKDIR /code
 
 COPY ./requirements.txt /code/requirements.txt
 
-RUN pip install --no-cache-dir --upgrade -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY ./main /code/main
 COPY ./models /code/models
